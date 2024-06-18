@@ -1,7 +1,4 @@
-/*
-функция получает в себя список мероприятий - list, название типа мероприятия - title
-статус включения пользователя в мероприятие -  isIncluded, статус мероприятия - statusTitle
-*/
+
 const filter = (list, title, isIncluded, statusTitle) => {
    let result = []
     if (title === 'Вебинар') {
