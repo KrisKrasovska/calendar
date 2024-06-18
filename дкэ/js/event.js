@@ -29,3 +29,23 @@ async function getEvents() {
 }
 
 getEvents();
+
+function createCard() {
+  return `  <!-- карточка мероприятия -->
+    <div class="event">
+      <div>
+        <p class="event__title">Название</p>
+        <p class="event__status">статус</p>
+        <p class="event__type">
+          <span class="event__img"
+            ><img
+              src="./images/trening.svg"
+              alt="event"
+              width="9"
+              height="9" /></span
+          ><span>тип</span>
+        </p>
+      </div>
+      <p class="event__add">Вы входите в состав участников</p>
+    </div>`;
+}
