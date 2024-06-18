@@ -80,12 +80,12 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     document.getElementById('prev-day').addEventListener('click', () => {
-        currentDate.setDate(currentDate.getDate() - 1);
+        currentDate.setDate(currentDate.getDate() - 7);
         renderCalendar(currentDate);
     });
 
     document.getElementById('next-day').addEventListener('click', () => {
-        currentDate.setDate(currentDate.getDate() + 1);
+        currentDate.setDate(currentDate.getDate() + 7);
         renderCalendar(currentDate);
     });
 
