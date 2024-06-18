@@ -3,7 +3,8 @@
 function getEvents(periodStart,periodEnd){
   const xhr = new XMLHttpRequest();
   // let str = "https://edu.soglasie.ru^443/oapi/CustomDKEEventsAPI/GetEvents"
-  
+  periodStart = new Date(periodStart)
+  periodEnd= new Date(periodEnd)
   xhr.open("POST", "https://edu.soglasie.ru:443/oapi/CustomDKEEventsAPI/GetEvents");
   
 
@@ -17,10 +18,11 @@ function getEvents(periodStart,periodEnd){
     periodEnd: periodEnd
   });
   xhr.onload = () => {
-    if (xhr.readyState == 4 && xhr.status == 201) {
+    if (xhr.readyState == 4 && xhr.status == 200) {
       console.log(JSON.parse(xhr.responseText));
+      return xhr.responseText
     } else {
-      console.log(`Error: ${xhr.status}`);
+      return false
     }
   };
   xhr.send()
@@ -30,7 +32,7 @@ function getEventInfo(eventID){
 //
 const xhr = new XMLHttpRequest()
 
-xhr.open("POST", "https://edu.soglasie.ru:443/oapi/CustomDKEEventsAPI/GetEventinfo");
+xhr.open("POST", "https://edu.soglasie.ru:443/oapi/CustomDKEEventsAPI/GetEventInfo");
 
 
 xhr.setRequestHeader("Content-Type", "application/json")
@@ -42,13 +44,15 @@ const body = JSON.stringify({
   eventID: eventID
 });
 xhr.onload = () => {
-  if (xhr.readyState == 4 && xhr.status == 201) {
+  if (xhr.readyState == 4 && xhr.status == 200) {
     console.log(JSON.parse(xhr.responseText));
+    return xhr.responseText
   } else {
-    console.log(`Error: ${xhr.status}`);
+    return false
   }
 };
 xhr.send()
 }
-console.log(getEvents("",""))
-console.log(getEvents(new Date("2024-02-06"), new Date("2024-06-18")))
+
+console.log(getEvents("2024-02-06","2024-06-18"))
+console.log(getEventInfo("7463587653"))
