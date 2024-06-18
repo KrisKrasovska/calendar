@@ -1,4 +1,3 @@
-const cards = document.querySelector(".cards");
 function createCard(title, status, type, isIncluded) {
   const img =
     type === "webinar" ? "./images/vebinar.svg" : "./images/trening.svg";
@@ -21,16 +20,9 @@ function createCard(title, status, type, isIncluded) {
         </p>
       </div>
       ${
-        isIncluded && '<p class="event__add">Вы входите в состав участников</p>'
+        isIncluded
+          ? '<p class="event__add">Вы входите в состав участников</p>'
+          : ""
       }
     </div>`;
 }
-
-const markup = createCard(
-  "Ораторское мастерство. Занятие 7",
-  "Проводится",
-  "webinar",
-  true
-);
-
-cards.innerHTML = markup;
