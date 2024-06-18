@@ -1,4 +1,5 @@
-.event {
+.event--trening,
+.event--webinar {
   padding: 8px 8px 8px 20px;
   box-shadow: 4px 4px 8px 0px #00000014;
   border: 1px solid #ffffff;
@@ -10,7 +11,8 @@
   align-items: flex-start;
   position: relative;
 }
-.event::after {
+.event--trening::after,
+.event--webinar::after {
   content: "";
   display: inline-block;
   width: 8px;
@@ -20,8 +22,14 @@
   position: absolute;
   top: 0;
   left: 0;
+}
+.event--webinar::after {
+  background-color: #ff6600;
+}
+.event--trening::after {
   background-color: #6b6b75;
 }
+
 .event__title {
   font-family: Montserrat;
   font-size: 12px;
@@ -40,14 +48,20 @@
   margin-bottom: 8px;
   color: #ff6600;
 }
-.event__img {
-  background-color: #d8e0df;
+.event__img--webinar,
+.event__img--trening {
   width: 15px;
   height: 15px;
   display: flex;
   justify-content: center;
   align-items: center;
   border-radius: 50%;
+}
+.event__img--webinar {
+  background-color: #ffceac;
+}
+.event__img--trening {
+  background-color: #d8e0df;
 }
 .event__type {
   font-family: Montserrat;

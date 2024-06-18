@@ -1,51 +1,36 @@
-async function getEvents() {
-  const url = "https://edu.soglasie.ru:443/oapi/CustomDKEEventsAPI/GetEvents";
-  const headers = {
-    Accept: "application/json, application/json",
-    "x-app-id": "7024984577114365647",
-    "Content-Type": "application/json",
-  };
-  const body = JSON.stringify({
-    periodStart: "",
-    periodEnd: "",
-  });
-
-  try {
-    const response = await fetch(url, {
-      method: "POST",
-      headers: headers,
-      body: body,
-    });
-
-    if (!response.ok) {
-      throw new Error("Network response was not ok " + response.statusText);
-    }
-
-    const data = await response.json();
-    console.log(data);
-  } catch (error) {
-    console.error("There was a problem with the fetch operation:", error);
-  }
-}
-
-getEvents();
-
-function createCard() {
-  return `  <!-- карточка мероприятия -->
-    <div class="event">
+const cards = document.querySelector(".cards");
+function createCard(title, status, type, isIncluded) {
+  const img =
+    type === "webinar" ? "./images/vebinar.svg" : "./images/trening.svg";
+  const classEvent = type === "webinar" ? "event--webinar" : "event--trening";
+  const classImg =
+    type === "webinar" ? "event__img--webinar" : "event__img--trening";
+  return `<div class=${classEvent}>
       <div>
-        <p class="event__title">Название</p>
-        <p class="event__status">статус</p>
+        <p class="event__title">${title}</p>
+        <p class="event__status">${status}</p>
         <p class="event__type">
-          <span class="event__img"
+          <span class=${classImg}
             ><img
-              src="./images/trening.svg"
+              src=${img}
               alt="event"
               width="9"
-              height="9" /></span
-          ><span>тип</span>
+              height="9" />
+				  </span>
+				  <span>${type === "webinar" ? "Вебинар" : "Тренинг"} </span>
         </p>
       </div>
-      <p class="event__add">Вы входите в состав участников</p>
+      ${
+        isIncluded && '<p class="event__add">Вы входите в состав участников</p>'
+      }
     </div>`;
 }
+
+const markup = createCard(
+  "Ораторское мастерство. Занятие 7",
+  "Проводится",
+  "webinar",
+  true
+);
+
+cards.innerHTML = markup;
