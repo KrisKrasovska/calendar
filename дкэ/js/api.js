@@ -25,7 +25,7 @@ function getEvents(periodStart,periodEnd){
       return false
     }
   };
-  xhr.send()
+  xhr.send(body)
 }
 
 function getEventInfo(eventID){
@@ -51,8 +51,8 @@ xhr.onload = () => {
     return false
   }
 };
-xhr.send()
+xhr.send(body)
 }
 
 console.log(getEvents("2024-02-06","2024-06-18"))
-console.log(getEventInfo("7463587653"))
+console.log(getEventInfo("5433345674"))
