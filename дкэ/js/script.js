@@ -1,22 +1,24 @@
 document.addEventListener('DOMContentLoaded', () => {
     const daysOfWeek = ['Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота', 'Воскресенье'];
-    let currentDay = 1;
+    let currentDate = new Date();
 
     const datesRow = document.getElementById('dates-row');
     const eventsRow = document.getElementById('events-row');
 
-    function renderCalendar(startDay) {
+    function renderCalendar(date) {
         datesRow.innerHTML = '';
         eventsRow.innerHTML = '';
 
         for (let i = 0; i < 5; i++) {
-            const date = (startDay + i - 1) % 31 + 1;
-            const dayOfWeek = daysOfWeek[(date - 1) % daysOfWeek.length];
+            const currentDay = new Date(date);
+            currentDay.setDate(date.getDate() + i);
+            const day = currentDay.getDate();
+            const dayOfWeek = daysOfWeek[currentDay.getDay()];
 
             const dateCol = document.createElement('div');
             dateCol.className = 'col date py-2';
             dateCol.innerHTML = `
-                <div class="number ${i === 2 ? 'bg-orange-custom' : ''}">${date}</div>
+                <div class="number ${i === 2 ? 'bg-orange-custom' : ''}">${day}</div>
                 <div class="day ${i === 2 ? 'bg-orange-custom' : ''}">${dayOfWeek}</div>
             `;
             datesRow.appendChild(dateCol);
@@ -67,14 +69,14 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     document.getElementById('prev-day').addEventListener('click', () => {
-        currentDay = (currentDay - 1 + 31) % 31 || 31;
-        renderCalendar(currentDay);
+        currentDate.setDate(currentDate.getDate() - 1);
+        renderCalendar(currentDate);
     });
 
     document.getElementById('next-day').addEventListener('click', () => {
-        currentDay = (currentDay + 1 - 1) % 31 + 1;
-        renderCalendar(currentDay);
+        currentDate.setDate(currentDate.getDate() + 1);
+        renderCalendar(currentDate);
     });
 
-    renderCalendar(currentDay);
+    renderCalendar(currentDate);
 });
